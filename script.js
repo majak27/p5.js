@@ -9,7 +9,9 @@ function setup() {
 }
 
 function draw() {
-  background(230);
+  background(230)
+  rect(200,200,100,100)
+  fill(0)
   for(let i = 0; i < circles.length; i++) {
     circles[i].move();
     circles[i].display();
@@ -17,12 +19,14 @@ function draw() {
   }
 
 class Circle {
-  constructor(x, y, v, u, color, size, radius) {
+  constructor(x, y, v, u, r,g,b, size, radius) {
     this.x = x;
     this.y = y;
     this.v = v;
     this.u = u;
-    this.color = (random(0,255),random(0,255),random(0,255),random(0,255))
+    this.r = random(255);
+    this.g = random(255);
+    this.b = random(255);
     this.size = random(10,100)
     this.radius = (this.size/2)
   }
@@ -36,14 +40,17 @@ class Circle {
     if (this.y < 25 || this.y > height) {
       this.u *= -1;
     }
-    if (this.x > 150|| this.x == 350) {
-      this.x *= -1
+    if (this.x >= 200-this.radius && this.x <= 300 + this.radius) {
+      this.v *= -1
+    }
+    if (this.y >= 200-this.radius && this.y <= 300 + this.radius) {
+      this.u *= -1
     }
   }
 
   display() {
     ellipse(this.x, this.y, this.size);
-    fill(this.color);
+    fill(this.r, this.b, this.g);
     noStroke();
   }
 }
